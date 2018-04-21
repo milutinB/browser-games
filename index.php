@@ -9,13 +9,11 @@ include 'HelloController.php';
 
 $r = $_SERVER["REQUEST_URI"];
 
+//echo $r;
+
 $controller;
 
-if ($r = "/") {
-	
-	echo file_get_contents("home.html");
-	
-} else if ($r == "/hello") {
+if ($r == "/hello") {
 	
 	$controller = new HelloController();
 	
