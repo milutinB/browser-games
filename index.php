@@ -9,10 +9,10 @@ include 'HelloController.php';
 
 $r = $_SERVER["REQUEST_URI"];
 
-//echo $r;
+echo $r;
 
-$controller;
-
+//$controller;
+/*
 if ($r == "/hello") {
 	
 	$controller = new HelloController();
@@ -20,4 +20,4 @@ if ($r == "/hello") {
 	$controller->response();
 }
 
- 
+ */
