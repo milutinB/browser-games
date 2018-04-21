@@ -7,6 +7,8 @@ include 'HelloController.php';
     exit();
 }*/
 
+
+
 $r = $_SERVER["REQUEST_URI"];
 
 echo $r;
