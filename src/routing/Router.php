@@ -1,5 +1,5 @@
 <?php
-require $_SERVER["DOCUMENT_ROOT"].'\src\controller\Request.php';
+require $_SERVER["DOCUMENT_ROOT"].'/src/controller/Request.php';
 require $_SERVER["DOCUMENT_ROOT"].'/src/controller/HomeController.php';
 error_reporting(E_ALL);
 
