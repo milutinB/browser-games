@@ -4,10 +4,12 @@ include 'src/hello.html;';
 
 //echo 'Hi';
 
-if($_SERVER["HTTPS"] != "on")
-{
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
+if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { 
+    $url = 'https://' . $_SERVER['HTTP_HOST']
+                      . $_SERVER['REQUEST_URI'];
+
+    header('Location: ' . $url);
+    exit;
 }
 
 $request = new Request($_GET, $_POST, $_SERVER["REQUEST_URI"]);
