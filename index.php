@@ -1,16 +1,22 @@
 <?php
-include 'HelloController.php';
+require 'src/routing/Router.php';
+error_reporting(E_ALL);
 
-
+//echo 'Hi';
 /*if($_SERVER["HTTPS"] != "on")
 {
     header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
     exit();
 }*/
 
-header("Location: databaseTest.php");
+$request = new Request($_GET, $_POST, $_SERVER["REQUEST_URI"]);
 
-$r = $_SERVER["REQUEST_URI"];
+$router = new Router($request);
+
+$response = $router->response();
+
+echo $response;
+
 
 /*echo $r;/
 
