@@ -2,7 +2,7 @@
 require 'src/routing/Router.php';
 error_reporting(E_ALL);
 
-include 'src/controller/hello.html;';
+include 'src/hello.html;';
 
 //echo 'Hi';
 /*if($_SERVER["HTTPS"] != "on")
