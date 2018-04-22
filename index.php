@@ -7,9 +7,8 @@ include 'src/hello.html;';
 if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { 
     $url = 'https://' . $_SERVER['HTTP_HOST']
                       . $_SERVER['REQUEST_URI'];
-
     header('Location: ' . $url);
-    exit;
+    die();
 }
 
 $request = new Request($_GET, $_POST, $_SERVER["REQUEST_URI"]);
@@ -20,16 +19,3 @@ $response = $router->response();
 
 echo $response;
 
-
-/*echo $r;/
-
-//$controller;
-/*
-if ($r == "/hello") {
-	
-	$controller = new HelloController();
-	
-	$controller->response();
-}
-
- */
