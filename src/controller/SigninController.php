@@ -34,7 +34,7 @@ class SigninController {
 			
 		} else {
 			
-			$q = "SELECT * FROM users WHERE username = '" . $username . "'";
+			$q = "SELECT * FROM users WHERE username = '" . pg_escape_string( $username ) . "'";
 			
 			$user = pg_fetch_assoc(
 				pg_query( $this->conn, $q )
