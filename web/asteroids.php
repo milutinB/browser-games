@@ -28,6 +28,12 @@
 		<audio id="thrust">
 			<source src="/web/javascript/games/asteroids/audio/thrust.mp3" type="audio/mpeg">
 		</audio>
+		<audio id="buzz">
+			<source src="/web/javascript/games/asteroids/audio/buzz.wav" type="audio/mpeg">
+		</audio>
+		<audio id="thud">
+			<source src="/web/javascript/games/asteroids/audio/thud.wav" type="audio/mpeg">
+		</audio>
 		<div>
 			
 		</div>
@@ -148,6 +154,8 @@ function game() {
 	var laserSound = document.getElementById("laser");
 	var bangSound = document.getElementById("bang");
 	var thrustSound = document.getElementById("thrust");
+	var buzzSound = document.getElementById("buzz");
+	var thudSound = document.getElementById("thud");
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
 	canvasWidth = parseInt(c.getAttribute("width"));
@@ -182,8 +190,6 @@ function game() {
 		
 		for (var i = 0; i < asteroids.length; i++) {
 			if (collision(ship, asteroids[i])) {
-				//alert("Game over :( \n You were hit by an asteroid. \n Your final score is: " + Math.floor(score));
-				//location.reload();
 				let p = ship.position;
 				let q = asteroids[i].position;
 				let m = p.midpoint(q);
@@ -196,6 +202,8 @@ function game() {
 				asteroids[i].velocity = asteroids[i].velocity.vectorAdd(asteroidBoost);
 
 				healthBar.capacity -= 10;
+				
+				thudSound.play();
 
 			}
 		}
@@ -239,6 +247,7 @@ function game() {
 				//location.reload();
 				healthBar.capacity -= 10;
 				projectiles.splice(j, 1);
+				buzzSound.play();
 			}
 		}
 
