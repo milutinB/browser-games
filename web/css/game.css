@@ -1,0 +1,11 @@
+html, body {
+	background : linear-gradient(#c4c9ce, black);
+	 margin: 0;
+    height: 100%;
+}
+
+.buffer {
+	
+	padding: 50px;
+	
+}

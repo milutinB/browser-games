@@ -13,7 +13,14 @@ class HomeController {
 
 	public function response() {
 		
-		return "Hello!" . " Welcome to your home page";
+		$page = $_SERVER["DOCUMENT_ROOT"] . "/web/home.php";
+		
+		//$data = array(
+			//"user" => $this->request
+		//				   ->getPost()["user"]
+		//);
+		
+		return new Response( $page , "page", array() );
 		
 	}
 	

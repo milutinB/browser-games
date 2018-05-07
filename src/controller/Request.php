@@ -5,15 +5,16 @@ class Request {
 	private $post;
 	private $requestURL;
 	
-	public function __construct($get, $post, $requestURL) {
+	public function __construct( $get, $post, $requestURL ) {
 		
 		$this->get = $get;
 		
 		$this->post = $post;
 		
 		$this->requestURL = $requestURL;
-		
+
 	}
+
 	
 	public function getGet() {
 		
@@ -32,5 +33,6 @@ class Request {
 		return $this->requestURL;
 		
 	}
+	
 	
 }

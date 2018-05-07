@@ -4,7 +4,7 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
  
 RewriteRule ^.*$ ./index.php
-
+#RewriteRule ^web - [L,NC]
 
 RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
 RewriteCond %{HTTP:X-Forwarded-Proto} =""
