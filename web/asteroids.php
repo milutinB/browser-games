@@ -338,7 +338,7 @@ function game() {
 						url : '/gameover',
 						type : 'POST',
 						DataType : 'json',
-						data : { score : score, game : 'asteroids' },
+						data : { score : parseInt(Math.floor(score)), game : 'asteroids' },
 						success : function(d) {
 							
 							if ( d.score ) {
