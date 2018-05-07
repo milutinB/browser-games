@@ -75,7 +75,7 @@
 									Rotate: Left and right arrow keys
 								</li>
 								<li>
-									Thrust: Up arroy key
+									Thrust: Up arrow key
 								</li>
 								<li>
 									Fire: Spacebar
