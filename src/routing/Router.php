@@ -71,19 +71,7 @@ class Router {
 			
 			$controller = new LeaderboardController ( $this->request, $this->conn );
 			
-		} else if ( $url = '/eooivnd7998349fh98939insnoi$*#(*&(*!IJBkbnoidvniunlkekllnfdkjem' ) {
-
-			$db = $this->conn;
-		
-			$q = "CREATE TABLE highscores ( username varchar( 40 ), game varchar(40), score integer )";
-
-			pg_query( $db, $q );
-
-			$q = "CREATE TABLE users ( username varchar(40), email varchar(100), password  varchar(100) )";	
-			
-			pg_query( $db, $q );
-			
-		}
+		} 
 		
 		if ( $controller != null ) {	
 		
