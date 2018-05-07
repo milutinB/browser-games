@@ -8,6 +8,7 @@ RewriteCond %{REQUEST_URI} !.*\.jpg$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.css$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.gif$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.js$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.wav$ [NC]
 RewriteRule .* /index.php
 
 RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
