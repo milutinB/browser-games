@@ -59,7 +59,7 @@
 								</li>
 								<li>
 									Lasers are red until they destroy an astroid, 
-									hen they turn white and will only damage your ship.
+									then they turn white and will only damage your ship.
 								</li> 
 								<li>
 									Purple laser disposal crates will appear. If you collect them, 
