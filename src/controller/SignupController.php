@@ -37,10 +37,10 @@ class SignupController {
 		
 		$response = "";
 		
-		$email = $post["email"];
+		$email = pg_escape_string( $post["email"] );
 		$password = hash('sha256', $post["password"]);
 		$repeatPassword = hash('sha256', $post["repeatPassword"]);
-		$username = $post["username"];
+		$username = pg_escape_string( $post["username"] );
 		$errorMessages = array();
 		
 		if (! ($email && 
