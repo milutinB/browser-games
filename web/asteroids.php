@@ -58,7 +58,7 @@
 									Your lasers will damage your ship!
 								</li>
 								<li>
-									Lasers are red until they destroy an astroid, 
+									Lasers are red until they destroy an asteroid, 
 									then they turn white and will only damage your ship.
 								</li> 
 								<li>
