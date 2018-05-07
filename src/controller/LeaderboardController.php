@@ -16,7 +16,7 @@ class LeaderboardController {
 		
 		$conn = $this->conn;
 		
-		$q = "SELECT * FROM highscores WHERE game = '" . $game . "' ORDER BY score DESC LIMIT 10";
+		$q = "SELECT * FROM highscores WHERE game = '" . pg_escape_string( $game ) . "' ORDER BY score DESC LIMIT 10";
 		
 		$result = pg_query( $conn, $q );
 		

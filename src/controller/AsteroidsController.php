@@ -43,7 +43,7 @@ class AsteroidsController {
 				$score = $row["score"];
 				
 				
-				$data["scoreMessage"] = "Your highest score is ". $score . ".";
+				$data["scoreMessage"] = "Your highest score is ". pg_escape_string( $score ) . ".";
 				
 			}
 			

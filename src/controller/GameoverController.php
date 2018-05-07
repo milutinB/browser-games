@@ -35,16 +35,16 @@ class GameoverController {
 		$content = '';
 		$data = array("tests");
 		
-		$q = "SELECT * FROM highscores WHERE username = '" . $user . "' AND  game = '" . pg_escape_string( $game ) . "'";
+		$q = "SELECT * FROM highscores WHERE username = '" . pg_escape_string( $user ). "' AND  game = '" . pg_escape_string( $game ) . "'";
 		
 		if ( $row = pg_fetch_assoc( pg_query( $db, $q ) ) ) {
 			
 			if ( $row["score"] < $score ) {
 				
-				$q = "DELETE FROM highscores WHERE username = '" . $user . "' AND game = '" . pg_escape_string( $game ) ."'";
+				$q = "DELETE FROM highscores WHERE username = '" . pg_escape_string( $user ) . "' AND game = '" . pg_escape_string( $game ) ."'";
 				pg_query( $db, $q );
 				
-				$q = "INSERT INTO highscores VALUES ( '" . $user . "', '" . pg_escape_string( $game ) . "', '" . pg_escape_string( $score ) . "')";
+				$q = "INSERT INTO highscores VALUES ( '" . pg_escape_string( $user ) . "', '" . pg_escape_string( $game ) . "', '" . pg_escape_string( $score ) . "')";
 				pg_query( $db, $q );
 				
 				$data["score"] = $score;
@@ -53,7 +53,7 @@ class GameoverController {
 			
 		} else {
 			
-			$q = "INSERT INTO highscores VALUES ( '" . $user . "', '" . pg_escape_string( $game ) . "', '" . pg_escape_string( $score ) . "')";
+			$q = "INSERT INTO highscores VALUES ( '" . pg_escape_string( $user ) . "', '" . pg_escape_string( $game ) . "', '" . pg_escape_string( $score ) . "')";
 				pg_query( $db, $q );
 			
 		}
