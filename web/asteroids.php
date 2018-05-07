@@ -81,7 +81,7 @@
 									<button class="btn btn-success" id="start"> start game </button>
 								</div>
 								<div class="col-sm-6">
-									<button class="btn btn-default"> back to games </button>
+									<button class="btn btn-default" id="back"> back to games </button>
 								</div>
 							</div>
 						</div>
@@ -111,8 +111,15 @@
 <script>
 
 $(document).ready(function() {
+	
+	$("#back").click(function() {
+		
+		window.location.href = "/games";
+		
+	});
 	window.addEventListener("keydown", function(e) {
-    // space and arrow keys
+
+	
     if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
     }

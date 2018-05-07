@@ -5,6 +5,22 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="web/javascript/home.js"></script>
 		<link  href="web/css/home.css" rel="stylesheet" />
+		<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td, th {
+			border: 2px solid #dddddd;
+			text-align: left;
+			padding: 10px;
+		}
+
+		tr:nth-child(even) {
+			background-color: green;
+		}
+		</style>
 	</head>
 	
 	<body>
