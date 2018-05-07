@@ -29,7 +29,7 @@
 				} else {
 			 ?>
 				<div style="color: white;"> Welcome, <?php echo $_SESSION["user"]; ?> </div>
-				<a class = "nav-link" href="/logout" style="color: white;"> Logout </a> 
+				<a class = "nav-link" href="/logout" style="color: white;"> Log Out </a> 
 			 <?php
 				}
 			 ?>
