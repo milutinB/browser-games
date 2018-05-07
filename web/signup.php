@@ -14,6 +14,8 @@
 			<div style="color: red;"><?php echo $error; ?></div>
 		
 		<?php } ?>
+		<div class="container buffer">
+		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4"></div>

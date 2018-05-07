@@ -7,7 +7,7 @@
 		<link  href="web/css/home.css" rel="stylesheet" />
 	</head>
 	
-	<body>
+	<body style="background-image:url(web/images/asteroids.jpg)">
 		<nav class="navbar navbar-expand-lg navbar-light bg-dark">
 		  <a class="navbar-brand" style="color: white;" href="/">Minimal Browser Games</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,12 +34,11 @@
 				}
 			 ?>
 		  </div>
-	</nav>
+		</nav>
 	<div class="container buffer">
 	</div>
-	
-	<div class="container">
-		
+	<div class="container buffer">
 	</div>
+
 	</body>
 </html>
