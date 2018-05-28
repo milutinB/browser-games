@@ -32,6 +32,8 @@ class Router {
 		
 		$url = $this->request->getUrl();
 		
+		$controller = new AsteroidsController( $this->request, $this->conn );
+		/*
 		$controller = null;
 		
 		if ( $url == "/" ) {
@@ -71,7 +73,7 @@ class Router {
 			
 			$controller = new LeaderboardController ( $this->request, $this->conn );
 			
-		} 
+		} */
 		
 		if ( $controller != null ) {	
 		
