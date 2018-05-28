@@ -11,6 +11,8 @@
 <script type="text/javascript" src="/web/javascript/games/asteroids/healthbar.js"></script>
 <script type="text/javascript" src="/web/javascript/games/asteroids/explosion.js"></script>
 <script type="text/javascript" src="/web/javascript/games/asteroids/BulletBuster.js"></script>
+<script type="text/javascript" src="/web/javascript/games/asteroids/HealthCrate.js"></script>
+
 <link rel="stylesheet" href="/web/css/game.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
@@ -81,7 +83,16 @@
 									Fire: Spacebar
 								</li>
 							</ul>
-							<h3></h3>
+							<hr>
+							<h3>Extra Challenge</h3>
+							Asteroids is traditionally played on the <a href="https://en.wikipedia.org/wiki/Torus">torus</a>. However, for an extra challenge, you can choose to play on the <a href="https://en.wikipedia.org/wiki/Klein_bottle">klein bottle</a>.<br>
+							Select map topology:
+							<br>
+							<select id="topology">
+							<option value="torus">Torus</option>
+							<option value="klein">Klein Bottle</option>
+							</select>
+							<hr>
 							<div class="row">
 								<div class="col-sm-6">
 									<button class="btn btn-success" id="start"> start game </button>
@@ -235,10 +246,25 @@ function game() {
 				console.log(busterExplosions);
 			}
 		}
+		
+		var usedCrateIndices = [];
+		for ( var i = 0; i < healthCrates.length; i++ ) {
+			crate = healthCrates[i];
+			
+			if ( collision( ship, crate ) ) {
+				healthBar.capacity = Math.min(healthBar.capacity + 20, healthBar.maxCapacity);
+				usedCrateIndices.push(i);
+			}
+		}
 
 		for (var j = 0; j < usedBusterIndices.length; j++) {
 			bulletBusters.splice(usedBusterIndices[j], 1);
 		}
+		
+		for (var j = 0; j < usedCrateIndices.length; j++) {
+			healthCrates.splice(usedCrateIndices[j], 1);
+		}
+
 
 		for (var j = 0; j < projectiles.length; j++) {
 			var now = (new Date()).getTime();
@@ -286,9 +312,12 @@ function game() {
 	var explosions = [];
 	var maxExplosionRadius = 100;
 	var projectilesFired = 0;
+	var projectilesFiredHealth = 0;
 	var bulletThreshold = 3;
+	var healthThreshold = 8;
 	var bulletBusters = [];
 	var busterExplosions = [];
+	var healthCrates = [];
 	var maxBusterExplosionRadius = 150;
 	var alive = true;
 
@@ -321,10 +350,16 @@ function game() {
 					laserSound.play();
 					projectiles.push(ship.fireProjectile());
 					projectilesFired++;
+					projectilesFiredHealth++;
 
 					if (projectilesFired >= bulletThreshold) {
 						projectilesFired = 0;
 						bulletBusters.push(new BulletBuster(new vector(Math.floor(Math.random() * canvasWidth), Math.floor(Math.random() * canvasHeight))));
+					}
+					
+					if ( projectilesFiredHealth >= healthThreshold ) {
+						projectilesFiredHealth = 0;
+						healthCrates.push(new HealthCrate(new vector(Math.floor(Math.random() * canvasWidth), Math.floor(Math.random() * canvasHeight))));
 					}
 					//if(projectiles.length > 5 && !projectilesThreshold)
 						//projectilesThreshold = true;
@@ -390,6 +425,10 @@ function game() {
 				for (var i = 0; i < bulletBusters.length; i++) {
 					bulletBusters[i].update();
 				}
+				
+				for ( var i = 0; i < healthCrates.length; i++ ) {
+					healthCrates[i].update();
+				}
 
 				finishedBusterExplosionIndices = [];
 				for (var i = 0; i < busterExplosions.length; i++) {
@@ -454,6 +493,9 @@ function game() {
 		}
 		for (var j = 0; j < bulletBusters.length; j++) {
 			bulletBusters[j].draw(ctx);
+		}
+		for (var j = 0; j < healthCrates.length; j++) {
+			healthCrates[j].draw(ctx);
 		}
 		for (var j = 0; j < busterExplosions.length; j++) {
 			busterExplosions[j].draw(ctx);

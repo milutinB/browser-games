@@ -35,6 +35,13 @@ Game.Ship.ship = function(position, radius, canvasWidth, canvasHeight) {
 
 	this.update = function() {
 		
+		var topology = document.getElementById('topology').value;
+		
+		if ( topology == "klein" && (this.position.y < 0 || this.position.y > this.cHeight)) {
+			this.forwardUnitVector = new vector(-this.forwardUnitVector.x, this.forwardUnitVector.y);
+			this.velocityVector = new vector(-this.velocityVector.x, this.velocityVector.y);
+		}
+		
 		this.position = this.position.wrap(this.cWidth, this.cHeight); 			
 		
 		this.forwardUnitVector = this.forwardUnitVector.rotate(new vector(0,0), this.angle*2);

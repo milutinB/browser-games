@@ -40,6 +40,13 @@ function asteroid(position, velocity, radius, canvasWidth, canvasHeight) {
 	
 	
 	this.update = function() {
+		
+		var topology = document.getElementById('topology').value;
+		
+		if ( topology == "klein" && (this.position.y < 0 || this.position.y > this.cHeight)) {
+			this.velocity = new vector(-this.velocity.x, this.velocity.y);
+		}
+		
 		this.position = this.position.wrap(this.cWidth, this.cHeight);
 		this.position = this.position.vectorAdd(this.velocity);
 	}

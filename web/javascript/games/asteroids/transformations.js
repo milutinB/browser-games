@@ -55,7 +55,9 @@ function vector(x, y) {
 		return new vector(this.x/this.length(), this.y/this.length());
 	}
 	this.wrap = function (w, h) {
+		var topology = document.getElementById('topology').value;
 		
+		if (topology == "klein") {
 		var outside = this.x > w || this.x < 0 || this.y > h || this.y < 0;
 		if(outside){
 			var X = this.x;
@@ -64,14 +66,36 @@ function vector(x, y) {
 				X+=parseInt(w);
 			else if(X > w)
 				X-= w;
-			else if(Y < 0)
-				Y += parseInt(h);	
-			else if(Y > h)
+			else if(Y < 0) {
+				Y += parseInt(h);
+				X = w - X;
+			}		
+			else if(Y > h) {
 				Y-= h;
+				X = w - X;
+			}
 			return new vector(X,Y);
 		}
 		else
 			return this;
+		} else {
+			var outside = this.x > w || this.x < 0 || this.y > h || this.y < 0;
+			if(outside){
+				var X = this.x;
+				var Y = this.y;
+				if(X < 0)
+					X+=parseInt(w);
+				else if(X > w)
+					X-= w;
+				else if(Y < 0)
+					Y += parseInt(h);	
+				else if(Y > h)
+					Y-= h;
+				return new vector(X,Y);
+			}
+			else
+				return this;
+		}
 	}
 }
 
