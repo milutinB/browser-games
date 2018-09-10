@@ -40,7 +40,7 @@
 			
 		</div>
 
-		<div class="container">
+		<div class="container" id="container">
 			<div class="row">
 			<div class="col-sm-2">
 				
@@ -168,11 +168,15 @@ function game() {
 	var buzzSound = document.getElementById("buzz");
 	var thudSound = document.getElementById("thud");
 	var c = document.getElementById("myCanvas");
+	//   c.style.width = window.innerWidth + "px";
+	//c.style.height = window.innerHeight + "px";
 	var ctx = c.getContext("2d");
 	canvasWidth = parseInt(c.getAttribute("width"));
 	canvasHeight = parseInt(c.getAttribute("height"));
-
-
+	
+	// TEST
+	//c.requestFullscreen();
+	
 	function startGame(canvasWidth, canvasHeight) {
 		let position = new vector(canvasWidth/2, canvasHeight/2);
 		let ship = new Game.Ship.ship(position, 40, canvasWidth, canvasHeight);
@@ -461,10 +465,7 @@ function game() {
 							
 							let velocityUpdate = posBuster.vectorAdd( posProj.multiply( -1 ) ).unit();
 							
-							proj.position = proj.position.vectorAdd( velocityUpdate.multiply(boostMagnitude) );
-							
-		
-							
+							proj.position = proj.position.vectorAdd( velocityUpdate.multiply(boostMagnitude) );	
 						}
 					}
 					
