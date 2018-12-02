@@ -36,46 +36,46 @@ class Router {
 
 		$controller = null;
 
-		if ( $url == "/" ) {
+		if ($url == "/") {
 
 			$controller = new HomeController($this->request);
 
 		}
-		else if ( $url == "/signup" ) {
+		else if ($url == "/signup") {
 
 			$controller = new SignupController($this->request, $this->conn);
 
-		} else if ( $url == '/signin' ) {
+		} else if ($url == '/signin') {
 
 			$controller = new SigninController( $this->request, $this->conn );
 
-		} else if ( $url == "/test" ) {
+		} else if ($url == "/test") {
 
 			$controller = new TestController($this->request);
 
-		} else if ( $url == "/logout" ) {
+		} else if ($url == "/logout") {
 
 			$controller = new LogoutController();
 
-		} else if ( $url == "/games" ) {
+		} else if ($url == "/games") {
 
 			$controller = new GamesController( $this->request );
 
-		} else if ( $url == "/games/asteroids" ) {
+		} else if ($url == "/games/asteroids") {
 
 			$controller = new AsteroidsController( $this->request, $this->conn );
 
-		} else if ( $url == '/gameover' ) {
+		} else if ($url == '/gameover') {
 
 			$controller = new GameoverController ( $this->request, $this->conn );
 
-		} else if ( $url == '/leaderboards' ) {
+		} else if ($url == '/leaderboards') {
 
 			$controller = new LeaderboardController ( $this->request, $this->conn );
 
 		}
 
-		if ( $controller != null ) {
+		if ($controller != null) {
 
 			return $controller->response();
 

@@ -1,170 +1,73 @@
 <?php
+include_once('./src/model/User.php');
+
 class SignupController {
 
 	private $request;
 	private $conn;
 
-
-	public function __construct( $request, $conn ) {
+	public function __construct($request, $conn) {
 		$this->request = $request;
 		$this->conn = $conn;
 	}
 
 
-	private function isValidEmail( $email ) {
-		return filter_var( $email, FILTER_VALIDATE_EMAIL );
-	}
-
-	private function isValidUsername( $username ) {
-		return sizeof( explode(" ", $username) ) == 1;
-	}
-
-
 	private function processRequest() {
-
-		//return "Hello, new user";
-
-		$post = $this->request->getPost();
-
-		$session = $_SESSION;
-
 		$response = "";
-
-		$email = pg_escape_string( $post["email"] );
-		$password = hash('sha256', $post["password"]);
-		$repeatPassword = hash('sha256', $post["repeatPassword"]);
-		$username = pg_escape_string( $post["username"] );
 		$errorMessages = array();
+		$email = $_POST["email"];
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		$repeatPassword = $_POST["repeatPassword"];
 
-		if (! ($email &&
-			   $password &&
-				$repeatPassword &&
-				$username)) {
-
-			//$response = "Ha";
-
+		if (!($email && $password && $repeatPassword && $username)) {
+			array_push($errorMessages, "All fields must be completed");
 			$type = 'page';
-
 			$page = $_SERVER["DOCUMENT_ROOT"] . "/web/signup.php";
-
 			$data = array();
-
-			array_push($data, array(
-				"errorMessages" => $errorMessages
-			));
-
-			$response = new Response( $page, $type, $data );
-
+			$data["errorMessages"] = $errorMessages;
+			$response = new Response($page, $type, $data);
 		}
 		else {
 
-			//$response = $email . ", " . $username . ", " . $password;
+			$user = array();
 
-
-			$q = "SELECT * FROM users WHERE email = '" . pg_escape_string( $email ) . "'";
-
-			if ( pg_fetch_assoc( pg_query( $this->conn, $q ) ) ) {
-
-				array_push( $errorMessages, "Email is already registered");
-
+			if ($password == $repeatPassword) {
+				$user = User::persist($email, $username, $password, $this->conn);
+		  } else {
+				//Report relevant error messages if the passwords don't match
+				array_push(
+					$errorMessages,
+					"Passwords don't match"
+				);
 			}
 
-			$q = "SELECT * FROM users WHERE username = '" . pg_escape_string( $username ) . "'";
-
-			if ( pg_fetch_assoc( pg_query( $this->conn, $q ) ) ) {
-
-				array_push( $errorMessages, "Username is already in use" );
-
-			}
-
-			if ( !$this->isValidEmail( $email ) ) {
-
-				array_push( $errorMessages, "Invalid email address." );
-
-			}
-
-			if ( !$this->isValidUsername( $username ) ) {
-
-				array_push($errorMessages, "Username cannot contain spaces");
-
-			}
-
-			if ( $password != $repeatPassword ) {
-
-				array_push( $errorMessages, "Passwords do not match." );
-
-			}
-
-			if ( sizeof( $errorMessages ) == 0 ) {
-
-				$q = "INSERT INTO users VALUES ('" . pg_escape_string( $username ) . "', '" . pg_escape_string( $email ) . "', '" . $password ."' )";
-
-				if ( pg_query ( $this->conn, $q ) ) {
-
-					$_SESSION["user"] = $username;
-					//$response = "success!";
-
-					//$response = $_SERVER["DOCUMENT_ROOT"] . "/web/home.html" . $session["user"];
-
-					$url = "/";
-
-					$type = 'redirect';
-
-					$data = array();
-
-					$response = new Response($url, $type, $data);
-
-				} else {
-
-					//$response = "Error: "; //. //pg_last_error($conn);
-
-					array_push( $errorMessages, "Error: Unable to create account");
-
-
-
-					$data = array(
-						"errorMessages"=>$errorMessages
-					);
-
-					$type = 'page';
-
-					$page = $_SERVER["DOCUMENT_ROOT"] . "/web/signup.php";
-
-					$response = new Response( $page, $type, $data );
-
-				}
-
-
-			} else {
+			if (!$user instanceof User) {
+				//Report relevant error messages if the persist method failed
+					$messages = $user;
+					foreach ($messages as $message) {
+						array_push(
+							$errorMessages,
+							$message
+						);
+					}
 
 				$type = 'page';
-
 				$page = $_SERVER["DOCUMENT_ROOT"] . "/web/signup.php";
-
-				$data = array(
-						"errorMessages"=>$errorMessages
-					);
-
-				$response = new Response( $page, $type, $data );
-
-
-
-
-
+				$data = array("errorMessages" => $errorMessages);
+				$response = new Response($page, $type, $data);
+			} else {
+				$_SESSION["user"] = $username;
+				$url = "/";
+				$type = 'redirect';
+				$data = array();
+				$response = new Response($url, $type, $data);
 			}
-
 		}
-
-
 		return $response;
-
 	}
-
-
 	public function response() {
-
 		return $this->processRequest();
-
 	}
 
 }

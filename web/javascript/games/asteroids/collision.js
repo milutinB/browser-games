@@ -26,7 +26,6 @@ function asteroidCollision(asteroidA, asteroidB) {
 function projectileExplosionCollision(projectile, explosion) {
 	var distVec = projectile.position.multiply(-1).vectorAdd(explosion.position);
 	var dist = distVec.length();
-
 	return dist < projectile.radius + explosion.radius;
 }
 

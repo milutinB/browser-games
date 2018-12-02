@@ -4,23 +4,17 @@ class GameoverController {
 	private $request;
 	private $conn;
 
-
 	public function __construct( $request, $conn ) {
-
 		$this->request = $request;
 		$this->conn = $conn;
-
 	}
 
 
 	private function processRequest() {
 
 		if ( !$_SESSION['user'] ) {
-
 			die();
-
 		}
-
 		$request = $this->request;
 		$db = $this->conn;
 		$post = $request->getPost();
@@ -51,7 +45,7 @@ class GameoverController {
 		} else {
 
 			$q = "INSERT INTO highscores VALUES ( '" . pg_escape_string( $user ) . "', '" . pg_escape_string( $game ) . "', '" . pg_escape_string( $score ) . "')";
-				pg_query( $db, $q );
+			pg_query( $db, $q );
 
 		}
 
