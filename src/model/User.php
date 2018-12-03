@@ -153,7 +153,10 @@ class User {
             var_dump($escapedUsername);
             var_dump($escapedEmail);
             var_dump($escapedPassword);
-            $query = "INSERT INTO users (email, username, password) VALUES ('$escapedEmail', '$escapedUsername', '$escapedPassword') RETURNING id";
+            //$query = "INSERT INTO users (email, username, password) VALUES ('$escapedEmail', '$escapedUsername', '$escapedPassword') RETURNING id";
+            $query = "INSERT INTO users (email, username, password) VALUES ('$escapedEmail', '$escapedUsername', '$escapedPassword')";
+            pg_query($db, $query);
+            $query =  "SELECT * FROM users WHERE email = '$escapedEmail'";
             $result = pg_query($db, $query);
             if ($row = pg_fetch_assoc($result)) {
                 $id = $row["id"];
