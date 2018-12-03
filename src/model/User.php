@@ -146,10 +146,13 @@ class User {
         $isValidUser = $isValidEmail && $isUniqueEmail && $isValidUsername && $isValidPassword;
 
         if ($isValidUser) {
-            $escapedEmail = pg_escape_string(filter_var( $email, FILTER_VALIDATE_EMAIL ));
+            $escapedEmail = pg_escape_string(filter_var($email, FILTER_VALIDATE_EMAIL));
             $escapedUsername = pg_escape_string($username);
             $escapedPassword = pg_escape_string($password);
             $escapedPassword = hash('sha256', $escapedPassword);
+            var_dump($escapedUsername);
+            var_dump($escapedEmail);
+            var_dump($escapedPassword);
             $query = "INSERT INTO users (email, username, password) VALUES ('$escapedEmail', '$escapedUsername', '$escapedPassword') RETURNING id";
             $result = pg_query($db, $query);
             if ($row = pg_fetch_assoc($result)) {

@@ -91,9 +91,7 @@ class Router {
 	}
 
 	public function response() {
-
 		return $this->passToController();
-
 	}
 
 
