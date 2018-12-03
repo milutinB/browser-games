@@ -150,9 +150,6 @@ class User {
             $escapedUsername = pg_escape_string($username);
             $escapedPassword = pg_escape_string($password);
             $escapedPassword = hash('sha256', $escapedPassword);
-            var_dump($escapedUsername);
-            var_dump($escapedEmail);
-            var_dump($escapedPassword);
             //$query = "INSERT INTO users (email, username, password) VALUES ('$escapedEmail', '$escapedUsername', '$escapedPassword') RETURNING id";
             $query = "INSERT INTO users (email, username, password) VALUES ('$escapedEmail', '$escapedUsername', '$escapedPassword')";
             pg_query($db, $query);
