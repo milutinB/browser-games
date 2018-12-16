@@ -69,5 +69,4 @@ class SignupController {
 	public function response() {
 		return $this->processRequest();
 	}
-
 }

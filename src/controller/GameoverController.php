@@ -1,4 +1,5 @@
 <?php
+include_once("./src/model/Score.php");
 class GameoverController {
 
 	private $request;
@@ -24,8 +25,24 @@ class GameoverController {
 
 		$type = 'json';
 		$content = '';
-		$data = array("tests");
+		$data = array();
 
+		$prevScore = Score::getUserScoreForGame($user, $game, $db);
+
+		if ($prevScore) {
+			$prevScore = $prevScore->getScore();
+		} else {
+			$prevScore = 0;
+		}
+
+
+		if ($score > $prevScore) {
+			$s = Score::persist($user, $game, $score, $db);
+			$data["score"] = $s->getScore();
+		}
+
+
+/*
 		$q = "SELECT * FROM highscores WHERE username = '" . pg_escape_string( $user ). "' AND  game = '" . pg_escape_string( $game ) . "'";
 
 		if ( $row = pg_fetch_assoc( pg_query( $db, $q ) ) ) {
@@ -47,7 +64,7 @@ class GameoverController {
 			$q = "INSERT INTO highscores VALUES ( '" . pg_escape_string( $user ) . "', '" . pg_escape_string( $game ) . "', '" . pg_escape_string( $score ) . "')";
 			pg_query( $db, $q );
 
-		}
+		}*/
 
 		return new Response( $content, $type, $data );
 

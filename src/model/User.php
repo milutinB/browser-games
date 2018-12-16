@@ -164,7 +164,6 @@ class User {
                 return null;
             }
         }
-
         return $errorMessages;
     }
 }

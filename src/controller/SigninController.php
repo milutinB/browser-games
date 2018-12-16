@@ -13,7 +13,7 @@ class SigninController {
 
 
 	private function processRequest() {
-		$username = pg_escape_string( $_POST["username"] );
+		$username = pg_escape_string($_POST["username"]);
 		$password = hash('sha256', $_POST["password"]);
 		$type = '';
 		$content = '';

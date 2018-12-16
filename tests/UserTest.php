@@ -185,7 +185,6 @@ final class UserTest extends TestCase {
             $user,
             "The query should return null"
         );
-
     }
 
     public function testDeleteUser() {

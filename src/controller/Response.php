@@ -5,6 +5,18 @@ class Response {
 	private $type;
 	private $data;
 
+	public function getContent() {
+		return $this->content;
+	}
+
+	public function getType() {
+		return $this->type;
+	}
+
+	public function getData() {
+		return $this->data;
+	}
+
 	public function __construct($content, $type, $data) {
 		$this->type = $type;
 		$this->content = $content;
